@@ -120,7 +120,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         //Catalogo Alquiler
-        Alquileres A = new Alquileres();
+        Alquiler A = new Alquiler();
         Escritorio.add(A);
         A.show();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
