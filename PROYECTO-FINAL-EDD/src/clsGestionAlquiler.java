@@ -19,7 +19,6 @@ public class clsGestionAlquiler {
         cliente.getCedula();
     }
 
-    //   clsGestionCliente gc = new clsGestionCliente();
     clsNodoCliente nc = new clsNodoCliente();
     private clsNodoAlquiler cabeza;
     private clsNodoAlquiler ultimo;
@@ -59,48 +58,11 @@ public class clsGestionAlquiler {
 
     }
 
-    /*public void cantidadDias(String id) {
-        // ListaDobleEnlazada gc = new ListaDobleEnlazada();
-        clsGestionCliente gc = new clsGestionCliente();
-        String cedula = " ";
-        clsCliente cliente = new clsCliente();
-        cedula = cliente.getCedula();
-
-        clsNodoCliente aux = cabezaC;
-        clsNodoAlquiler aux2 = cabeza;
-
-        while (aux2.getNext() != null && aux2.getDato().getId() != id) {
-            System.out.println("Hola1");
-
-            aux2 = aux2.getNext();
-            System.out.println("aaaaa");
-        }
-
-        while (cedula != id) {
-            System.out.println("Hola2A");
-            //gc.AvanzarLista(id);
-            // gc.AvanzarLista();
-            aux = aux.getNext();
-            // nc = nc.getNext();
-            //System.out.println(aux);
-
-        }
-
-        if (aux2.getDato().getId() == cedula) {
-            System.out.println("Hola3");
-            if (aux2.getDato().getCantDias() >= 30) {
-                System.out.println("Hola4");
-                //varios ifs para categoria
-                aux.getDato().setCategoria("ORO");
-            }
-        }
-    }*/
-
-public String consultar(String numeroPlaca) {
+    public String consultar(String numeroPlaca) {
         clsNodoAlquiler aux = this.cabeza;
         String id = " ", marca = " ";
-        String  extras = " ", estado = " ";
-         String placa = " ", cantDias = " ", pasajeros = " ";
+        String extras = " ", estado = " ";
+        String placa = " ", cantDias = " ", pasajeros = " ";
         int contador = 1;
         if (esVacia()) {
             JOptionPane.showMessageDialog(null, "Esta vacia");
@@ -126,40 +88,21 @@ public String consultar(String numeroPlaca) {
         System.out.println(id + "," + placa + "," + cantDias + "," + pasajeros + "," + marca + "," + extras + "," + estado);
         return id + "," + placa + "," + cantDias + "," + pasajeros + "," + marca + "," + extras + "," + estado;
 
-}
-
-
-
-
-
+    }
 
     public void cantidadDiasS(String id) {
-        // ListaDobleEnlazada gc = new ListaDobleEnlazada();
-        /*clsGestionCliente gc = new clsGestionCliente();
-        String cedula = " ";
-        clsCliente cliente = new clsCliente();
-        cedula = cliente.getCedula();*/
 
         clsNodoCliente aux = cabezaC;
         clsNodoAlquiler aux2 = cabeza;
-        // System.out.println("Aqui");
 
-        /*while (aux2.getNext() != null && aux2.getDato().getId() != id) {
-            System.out.println("primero");
-            aux2 = aux2.getNext();
-        }*/
         System.out.println("AAA");
-        /*  while (clsNodoCliente.next != null && clsNodoCliente.dato.getCedula() != id) {
-            System.out.println("segundo");
-            aux = aux.getNext();
 
-        }*/
         System.out.println("BBB");
         // if (aux2.getDato().getId().equalsIgnoreCase(id)) {
         System.out.println("Tercero");
         if (aux2.getDato().getCantDias() >= 30) {
             System.out.println("CCC");
-            if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Bronce") || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("bronce") ) {
+            if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Bronce") || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("bronce")) {
                 clsNodoCliente.dato.setCategoria("Plata");
             } else if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Plata") || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("plata")) {
                 clsNodoCliente.dato.setCategoria("Oro");
@@ -167,31 +110,9 @@ public String consultar(String numeroPlaca) {
                 clsNodoCliente.dato.setCategoria("Zafiro");
             }
 
-          
         }
 
     }
-
-
- //varios ifs para categoria
-            // aux.getDato().setCategoria("ORO");
-            //  cabezaC.getDato().setCategoria("0r0");
-            //   aux.getDato().setCategoria("Oro");
-        //  }
-
-        /*while (clsNodoCliente.next != null && clsNodoCliente.dato.getCedula() !=id) {
-            System.out.println("Hola2A");
-             
-         // clsNodoCliente.next.getNext();
-          aux = aux.getNext();
-            //gc.AvanzarLista(id);
-            // gc.AvanzarLista();
-            //aux = aux.getNext();
-            // nc = nc.getNext();
-            //System.out.println(aux);
-
-        }*/
-
 
     public void asignaVehiculos(clsAtributosAlquiler v) {
         clsNodoAlquiler aux2 = cabeza;
@@ -221,26 +142,6 @@ public String consultar(String numeroPlaca) {
 
     }
 
-    /* public void montoSuperior(String id) {
-        clsNodoCliente aux = cabezaC;
-        clsNodoAlquiler aux2 = cabeza;
-
-        while (aux2.getNext() != null && aux2.getDato().getId() != id) {
-            aux2 = aux2.getNext();
-        }
-
-        while (aux.getNext() != null && aux.getDato().getCedula() != id) {
-            aux = aux.getNext();
-        }
-
-        if (aux.getDato().getCedula() == aux2.getDato().getId()) {
-            if (monto >= 70000) {
-                aux.getDato().setCategoria("ZAFIRO");
-            }
-        }
-
-    }
-     */
     public void montoSuperior(String id) {
         clsNodoCliente aux = cabezaC;
         clsNodoAlquiler aux2 = cabeza;
@@ -343,7 +244,6 @@ public String consultar(String numeroPlaca) {
                 aux = aux.getNext();
             }
             System.out.println(datos + "Mostrando lista");
-            //JOptionPane.showMessageDialog(null, datos, "Mostrando lista", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
