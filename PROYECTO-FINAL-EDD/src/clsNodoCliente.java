@@ -38,13 +38,4 @@ public class clsNodoCliente {
         this.next = next;
     }
 
-   
-
-    /*
-    @Override
-    public String toString() {
-        return "clsNodoCliente{" + "dato=" + dato + '}';
-    }
-
-     */
 }
