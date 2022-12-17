@@ -79,17 +79,21 @@ public class clsGestionAlquiler {
 
                     break;
                 } else {
-                    JOptionPane.showMessageDialog(null, id + "," + placa + "," + cantDias + "," + pasajeros + "," + marca + "," + extras + "," + estado);
+                    JOptionPane.showMessageDialog(null, id + "," + placa + "," 
+                            + cantDias + "," + pasajeros + "," + marca + "," 
+                            + extras + "," + estado);
                 }
                 aux = aux.getNext();
                 contador++;
             } while (aux != cabeza);
         }
-        System.out.println(id + "," + placa + "," + cantDias + "," + pasajeros + "," + marca + "," + extras + "," + estado);
-        return id + "," + placa + "," + cantDias + "," + pasajeros + "," + marca + "," + extras + "," + estado;
+        System.out.println(id + "," + placa + "," + cantDias + "," + pasajeros 
+                + "," + marca + "," + extras + "," + estado);
+        return id + "," + placa + "," + cantDias + "," + pasajeros + "," 
+                + marca + "," + extras + "," + estado;
 
     }
-
+    //valida la cantidad de dias, dependiendo de su categoria lo va a subir. 
     public void cantidadDiasS(String id) {
 
         clsNodoCliente aux = cabezaC;
@@ -102,9 +106,11 @@ public class clsGestionAlquiler {
         System.out.println("Tercero");
         if (aux2.getDato().getCantDias() >= 30) {
             System.out.println("CCC");
-            if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Bronce") || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("bronce")) {
+            if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Bronce") 
+                    || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("bronce")) {
                 clsNodoCliente.dato.setCategoria("Plata");
-            } else if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Plata") || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("plata")) {
+            } else if (clsNodoCliente.dato.getCategoria().equalsIgnoreCase("Plata") 
+                    || clsNodoCliente.dato.getCategoria().equalsIgnoreCase("plata")) {
                 clsNodoCliente.dato.setCategoria("Oro");
             } else {
                 clsNodoCliente.dato.setCategoria("Zafiro");
@@ -113,7 +119,9 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    // para asignar los vehiculos se itera sobre las dos estructuras usadas para 
+    //usuarios y vehiculos, una vez se encuentra la que se desea, para la iteracion
+    //Si el estado de la lista es registrada entra al if y realiza mas validaciones. 
     public void asignaVehiculos(clsAtributosAlquiler v) {
         clsNodoAlquiler aux2 = cabeza;
         clsNodoVehiculos vehiculo = cabezaV;
@@ -123,7 +131,9 @@ public class clsGestionAlquiler {
         while (aux2.getNext() != null && aux2.getDato().getEstado() != estado) {
             aux2 = aux2.getNext();
         }
-        while (clsNodoVehiculos.next != null && Integer.parseInt(clsNodoVehiculos.dato.getCapacidadPasajeros()) != aux2.getDato().getPasajeros()) {
+        while (clsNodoVehiculos.next != null && 
+                Integer.parseInt(clsNodoVehiculos.dato.getCapacidadPasajeros()) 
+                != aux2.getDato().getPasajeros()) {
             vehiculo = vehiculo.getNext();
         }
 
@@ -132,7 +142,8 @@ public class clsGestionAlquiler {
                 aux2.getDato().setPlaca(Integer.parseInt(clsNodoVehiculos.dato.getNumeroPlaca()));
                 clsNodoVehiculos.dato.setEstado("Alquilado");
                 aux2.getDato().setEstado("Procesada");
-                monto = Integer.parseInt(clsNodoVehiculos.dato.getPrecioAlq()) * aux2.getDato().getCantDias() * 0.13;
+                monto = Integer.parseInt(clsNodoVehiculos.dato.getPrecioAlq()) 
+                        * aux2.getDato().getCantDias() * 0.13;
                 JOptionPane.showMessageDialog(null, "El monto a pagar sera: " + monto);
             } else {
                 JOptionPane.showMessageDialog(null, "No hay vehiculos disponibles con esas caracteristicas");
@@ -141,7 +152,8 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    //se itera sobre la lista de alquiler hasta encontrar registrado uno bajo ese
+    //id una vez se encuentra se compara con el monto
     public void montoSuperior(String id) {
         clsNodoCliente aux = cabezaC;
         clsNodoAlquiler aux2 = cabeza;
@@ -171,7 +183,7 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    // consulta vehiculos por id
     public void consultaVehiculosID(String id) {
         if (cabeza != null) {
             clsNodoAlquiler aux = cabeza;
@@ -183,18 +195,21 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    //metodo para devolver in vehiculo, este itera sobre las dos estructuras
+    //declaradas anteriormente, toma parametros de referencia y compara. 
     public void devolucionVehiculo(String id, int placa) {
         System.out.println("Cero");
         clsNodoAlquiler aux2 = cabeza;
         clsNodoVehiculos vehiculo = cabezaV;
 
-        while (clsNodoAlquiler.next != null && clsNodoAlquiler.dato.getId() != id && clsNodoAlquiler.dato.getPlaca() != placa) {
+        while (clsNodoAlquiler.next != null && clsNodoAlquiler.dato.getId() 
+                != id && clsNodoAlquiler.dato.getPlaca() != placa) {
             System.out.println("Primero");
             aux2 = aux2.getNext();
         }
 
-        while (clsNodoVehiculos.next != null && Integer.parseInt(clsNodoVehiculos.dato.getNumeroPlaca()) != placa) {
+        while (clsNodoVehiculos.next != null 
+                && Integer.parseInt(clsNodoVehiculos.dato.getNumeroPlaca()) != placa) {
             System.out.println("Segundo");
             vehiculo = vehiculo.getNext();
         }
@@ -207,7 +222,7 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    //Metodo para imprimir, recorre toda la lista. 
     public void desplegarlista() {
         // Crea una copia de la pila.
         clsNodoAlquiler aux = new clsNodoAlquiler();
@@ -215,23 +230,27 @@ public class clsGestionAlquiler {
         if (cabeza != null) {
             while (aux != null) {
                 System.out.println("hola1");
-                System.out.println("|\t" + aux.getDato().getId() + " " + aux.getDato().getPlaca() + " "
-                        + aux.getDato().getCantDias() + " " + aux.getDato().getPasajeros() + " " + aux.getDato().getMarca()
-                        + " " + aux.getDato().getExtras() + " " + aux.getDato().getEstado() + "\t|");
+                System.out.println("|\t" + aux.getDato().getId() + " " 
+                        + aux.getDato().getPlaca() + " "
+                        + aux.getDato().getCantDias() + " " 
+                        + aux.getDato().getPasajeros() + " " 
+                        + aux.getDato().getMarca()
+                        + " " + aux.getDato().getExtras() + " " 
+                        + aux.getDato().getEstado() + "\t|");
                 System.out.println("----------------------------------------");
                 aux = aux.getNext();
             }
 
-        } else {     // Recorre la pila hasta el ultimo node.
+        } else {     // Recorre la lista hasta el ultimo node.
             System.out.println("Esta vacia");
         }
 
     }
-
+    //metodo para comprobar si es vacia 
     public boolean esVacia() {
         return (this.cabeza == null);
     }
-
+    //metodo para impresion de la lista de alquiler
     public void mostrarListaInicioFin() {
 
         if (!esVacia()) {
@@ -240,7 +259,9 @@ public class clsGestionAlquiler {
             while (aux != null) {
 
                 System.out.println("Hola2");
-                datos = datos + "[" + " Placa: " + aux.getDato().getId() + ", Año: " + aux.getDato().getPlaca() + ", Dias: " + aux.getDato().getCantDias() + "]  <=>  ";
+                datos = datos + "[" + " Placa: " + aux.getDato().getId() 
+                        + ", Año: " + aux.getDato().getPlaca() + ", Dias: " 
+                        + aux.getDato().getCantDias() + "]  <=>  ";
                 aux = aux.getNext();
             }
             System.out.println(datos + "Mostrando lista");
@@ -248,7 +269,7 @@ public class clsGestionAlquiler {
         }
 
     }
-
+    //metodo toString convencional 
     public String toString() {
         clsNodoAlquiler aux = cabeza;
         String s = "Lista: ";
