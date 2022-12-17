@@ -57,17 +57,12 @@ public class Vehiculos extends javax.swing.JInternalFrame {
             modelo1.insertRow(contador, new Object[]{});
             modelo1.setValueAt(vehiculo.getDato().getNumeroPlaca(), contador, 0);
             modelo1.setValueAt(vehiculo.getDato().getAnio(), contador, 1);
-            // modelo.setValueAt(vehiculo.getDato().getNacimiento(), contador, 2);
-            // modelo.setValueAt(cliente.getDato().getCorreo(), contador, 3);
-            //modelo.setValueAt(cliente.getDato().getCategoria(), contador, 4);
-            //modelo1.setValueAt(vehiculo.getDato().getEstado(), contador, 3);
+            
         }
 
     }
 
-//par arriba
-//impar abajo
-//main
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -333,7 +328,7 @@ public class Vehiculos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void agregar() {
-        numeroPlaca = txtPlaca.getText(); //Pide datos
+        numeroPlaca = txtPlaca.getText(); 
         anio = (txtAnio.getText());
         cilindrada = (txtCilindrada.getText());
         capacidadPasajeros = (txtPasajeros.getText());
@@ -345,24 +340,18 @@ public class Vehiculos extends javax.swing.JInternalFrame {
         extras = txtExtras.getText();
         estado = txtEstado.getText();
 
-        // Here we verify if all data are correct
+        
         clsVehiculos v = new clsVehiculos(numeroPlaca, anio, cilindrada, capacidadPasajeros, precioAlq, marca, modelo, color, tipoDeCombustible, extras, estado);
         cls.registrar(v);
 
-        /*  cls.registrar(new clsVehiculos(numeroPlaca, anio, cilindrada, capacidadPasajeros,
-                    precioAlq, marca, modelo, color, tipoDeCombustible, extras, estado));*/
+        
         auxPosicion++;
         posicion = Integer.toString(auxPosicion);
 
         String[] info = new String[5];
         info[0] = txtPlaca.getText();
         info[1] = txtAnio.getText();
-        //info[2] = txtEstado.getText();
         
-
-        // info[2] = jtxtborn.getText();
-        // info[3] = jtxtCorreo.getText();
-        // info[4] = jtxtCategorias.getText();
         txtPlaca.setText("");
         txtCilindrada.setText("");
         txtExtras.setText("");
@@ -472,8 +461,7 @@ public class Vehiculos extends javax.swing.JInternalFrame {
     public void borrarDatos() {
         try {
 
-            //clsVehiculos v = new clsVehiculos(numeroPlaca, anio, cilindrada, capacidadPasajeros, precioAlq, marca, modelo, color, tipoDeCombustible, extras, estado);
-            // cls.modificarVehiculo(v);
+            
             numeroPlaca = txtPlaca.getText();
             cls.removerEnPosicion(numeroPlaca);
             CargarInterfaz(); //Sirven para la tabla
@@ -498,37 +486,7 @@ public class Vehiculos extends javax.swing.JInternalFrame {
     }
 
 
-    /*public void borrarDatos() {
-        try {
-
-           
-                int borrarDato = Integer.parseInt(numeroPlaca);
-
-            if (!nulos()) {  //Aqui ponemos si tiene alquier o no
-                if (cls.removerEnPosicion(borrarDato)) {
-
-                    JOptionPane.showMessageDialog(null, "Vehiculo borrado correctamente", "Cliente borrado", JOptionPane.INFORMATION_MESSAGE);
-                    limpiar();
-                    //borrarDato();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Tiene un alquier asociado", "Error encontrado", JOptionPane.ERROR_MESSAGE);
-                }
-
-                int filaSelec = Tabla.getSelectedRow();
-
-                if (filaSelec >= 0) {
-                    modelo1.removeRow(filaSelec);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Fila no seleccionada");
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Tiene un alquier asociado", "Error encontrado", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Debe hacer una consulta y luego si lo desea puede borrar el Cliente", "Error encontrado", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
+    
     public boolean nulos() {
         if (!numeroPlaca.equals("") || !(anio).equals(" ") || !(cilindrada).equals(" ")
                 || !(capacidadPasajeros).equals(" ") || !(precioAlq).equals(" ")
