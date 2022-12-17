@@ -17,7 +17,6 @@ public class clsGestionVehiculo {
         return (this.cabeza == null);
     }
 
-
     public void registraVehiculo(clsVehiculos v) {
         if (cabeza == null) {
             cabeza = new clsNodoVehiculos(v);
@@ -31,7 +30,6 @@ public class clsGestionVehiculo {
         this.cantNodos++;
     }
 
-
     public void registrar(clsVehiculos v) {
 
         clsNodoVehiculos newnode = new clsNodoVehiculos(v);
@@ -41,10 +39,9 @@ public class clsGestionVehiculo {
         } else {
             newnode.setNext(cabeza);
             cabeza = newnode;
-           cabeza.getNext().setBack(newnode);
+            cabeza.getNext().setBack(newnode);
         }
     }
-
 
     public boolean eliminaVehiculo(String numeroPlaca) {
         if (cabeza != null) {
@@ -70,30 +67,29 @@ public class clsGestionVehiculo {
         return (indice > 0 && indice <= this.cantNodos) || (indice > 0 && indice == this.cantNodos + 1);
     }
 
-
     public boolean removerEnPosicion(String placa) {
 
         if (cabeza == null) {
-          
+
             return false;
         } else {
-               System.out.println(cabeza.getDato().getNumeroPlaca());
-               System.out.println(placa);
+            System.out.println(cabeza.getDato().getNumeroPlaca());
+            System.out.println(placa);
             clsNodoVehiculos aux = this.cabeza;
             if (cabeza.getDato().getNumeroPlaca().equalsIgnoreCase(placa)) {
-              
+
                 this.eliminarprimero();
                 return true;
             } else if (ultimo.getDato().getNumeroPlaca().equalsIgnoreCase(placa)) {
-               
+
                 this.eliminarUltimo();
                 return true;
             } else {
-                
+
                 while (aux.getNext() != null) {
-                   
+
                     if (aux.getDato().getNumeroPlaca().equalsIgnoreCase(placa)) {
-                       
+
                         aux.getBack().setNext(aux.getNext());
                         aux.getNext().setBack(aux.getBack());
 
@@ -110,10 +106,10 @@ public class clsGestionVehiculo {
     public void eliminarprimero() {
         if (cabeza != null) {
             if (cabeza == ultimo) {
-                cabeza = ultimo = null;   
+                cabeza = ultimo = null;
             } else {
                 cabeza = cabeza.getNext();
-                cabeza.setBack(null);               
+                cabeza.setBack(null);
             }
         }
     }
@@ -129,7 +125,6 @@ public class clsGestionVehiculo {
         }
     }
 
-    
     public void modificarVehiculo(clsVehiculos v) {
         if (cabeza != null) {
             clsNodoVehiculos aux = cabeza;
@@ -150,7 +145,6 @@ public class clsGestionVehiculo {
             }
         }
     }
-
 
     public boolean modifcar(String numeroPlaca, String anio, String cilindrada, String capacidadPasajeros, String precioAlq, String marca, String modelo, String color, String tipoDeCombustible, String extras, String estado) {
 
@@ -193,26 +187,20 @@ public class clsGestionVehiculo {
         return respuesta;
     }
 
-
- public String consultaVehiculos(String numeroPlaca) {
-  String placaVehiculo = " ";
+    public String consultaVehiculos(String numeroPlaca) {
+        String placaVehiculo = " ";
         if (cabeza != null) {
             clsNodoVehiculos aux = cabeza;
             while (aux.getDato().getNumeroPlaca().equalsIgnoreCase(numeroPlaca)) {
                 aux = aux.getNext();
             }
-             placaVehiculo = aux.getDato().getNumeroPlaca();
-           // JOptionPane.showMessageDialog(null, aux);
+            placaVehiculo = aux.getDato().getNumeroPlaca();
+
             System.out.println(placaVehiculo);
         }
         return placaVehiculo;
 
     }
-
-
-
-
-
 
     public String consultar(String numeroPlaca) {
         clsNodoVehiculos aux = this.cabeza;
@@ -224,7 +212,7 @@ public class clsGestionVehiculo {
         } else {
             do {
                 if (aux.getDato().getNumeroPlaca().equalsIgnoreCase(numeroPlaca)) {
-                   
+
                     estado = aux.getDato().getEstado();
                     placaVehiculo = aux.getDato().getNumeroPlaca();
                     anio = aux.getDato().getAnio();
@@ -236,7 +224,7 @@ public class clsGestionVehiculo {
                     color = aux.getDato().getColor();
                     tipoDeCombustible = aux.getDato().getTipoDeCombustible();
                     extras = aux.getDato().getExtras();
-                    
+
                     break;
                 } else {
                     JOptionPane.showMessageDialog(null, "El vehiculo con esos datos no existe");
@@ -257,24 +245,20 @@ public class clsGestionVehiculo {
                 + extras + "," + estado;
     }
 
+    public void mostrarListaInicioFin() {
 
-public void mostrarListaInicioFin(){
+        if (!esVacia()) {
+            String datos = "<=>";
+            clsNodoVehiculos aux = ultimo;
+            while (aux != null) {
 
-    if (!esVacia()) {
-       String datos = "<=>" ;
-       clsNodoVehiculos aux= ultimo;
-while(aux!= null){
+                datos = datos + "[" + " Placa: " + aux.getDato().getNumeroPlaca() + ", Año: " + aux.getDato().getAnio() + ", Pasajeros: " + aux.getDato().getCapacidadPasajeros() + "  Estado: " + aux.getDato().getEstado() + "]  <=>  ";
+                aux = aux.getBack();
+            }
+            System.out.println(datos + "Mostrando lista");
 
-datos = datos + "["+" Placa: " + aux.getDato().getNumeroPlaca() + ", Año: " + aux.getDato().getAnio()+ ", Pasajeros: " + aux.getDato().getCapacidadPasajeros() + "  Estado: " + aux.getDato().getEstado()+ "]  <=>  ";
- aux = aux.getBack();
-}
-        System.out.println(datos + "Mostrando lista");
-
-
+        }
     }
-}
-
-
 
     @Override
     public String toString() {
