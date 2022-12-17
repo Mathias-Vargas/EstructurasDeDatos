@@ -14,17 +14,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Clientes extends javax.swing.JInternalFrame {
 
+    //Variables
     public String user;
-    String cedulaCliente = " ", nombre = " ", nacimiento = " ", correo = " ", categorias = " ", posicion = "1";
+    String cedulaCliente = " ", nombre = " ", nacimiento = " ", correo = " ", 
+     categorias = " ", posicion = "1";
     boolean editar = false;
     private int auxPosicion = 1;
 
+//Instancia
     clsGestionCliente cls = new clsGestionCliente();
 
     DefaultTableModel modelo = new DefaultTableModel();
     private int contador = 0;
     public int buscar;
 
+//Constructor
     public Clientes() {
         initComponents();
         CargarInterfaz(); //Sirven para la tabla
@@ -32,6 +36,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         setTitle("Agregar, Consultar, Modificar y Editar Clientes");
 
     }
+//Constructor
 
     public Clientes(String user, clsGestionCliente cls) {
         initComponents();
@@ -40,6 +45,7 @@ public class Clientes extends javax.swing.JInternalFrame {
 
     public static LinkedList contenedor = new LinkedList();
 
+//Carga la interfaz con sus respectivos datos
     public void CargarInterfaz() {
         String datos[][] = {};
         String columna[] = {"Cedula", "Nombre"};
@@ -52,7 +58,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         clsNodoCliente cliente;
 
         for (int i = 0; i < Clientes.contenedor.size(); i++) {
-
+//Hace get para obtener los datos
             cliente = (clsNodoCliente) Clientes.contenedor.get(i);
             modelo.insertRow(contador, new Object[]{});
             modelo.setValueAt(cliente.getDato().getCedula(), contador, 0);
@@ -312,43 +318,53 @@ public class Clientes extends javax.swing.JInternalFrame {
     }
 
     public void agregar() {
-        cedulaCliente = jtxtIds.getText(); //Pide datos
+        //Pide datos
+        cedulaCliente = jtxtIds.getText(); 
         nombre = jtxtNombre.getText();
         nacimiento = jtxtborn.getText();
         correo = jtxtCorreo.getText();
         categorias = jtxtCategorias.getText();
         boolean pase = true;
-        // Here we verify if all data are correct
+
         if (pase == true) {
-            cls.registrarCliente(new clsCliente(cedulaCliente, nombre, nacimiento, correo, categorias));
+           //Llama al metodo y si le pasan los datos por parametros
+            cls.registrarCliente(new clsCliente(cedulaCliente, nombre, 
+            nacimiento, correo, categorias));
             auxPosicion++;
             posicion = Integer.toString(auxPosicion);
 
+            // Agrega los datos a la tabla
             String[] info = new String[5];
             info[0] = jtxtIds.getText();
             info[1] = jtxtNombre.getText();
 
+           //Limpia los campos
             jtxtIds.setText("");
             jtxtNombre.setText("");
             jtxtborn.setText("");
             jtxtCorreo.setText("");
             jtxtCategorias.setText("");
 
+           // Agrega los datos a la tabla
             modelo.addRow(info);
 
-            JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "Cliente Registrado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuario registrado "
+     + "correctamente", "Cliente Registrado", JOptionPane.INFORMATION_MESSAGE);
             limpiar();
         } else {
-            JOptionPane.showMessageDialog(null, "Error, hay algunos datos con formato o valores no permitidos", "Error Datos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error, hay algunos datos con "
+ + " formato o valores no permitidos", "Error Datos", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void consultar() {
         try {
             clsCliente c = new clsCliente();
+            //Pide el dato
             String cedula = (jtxtIds.getText());
             boolean pase = true;
-            if (pase == true) {  //" ".equals(cedula,
+            if (pase == true) {  
+                 //Llama al metodo y lo pasa por parametros
                 String datos = cls.buscarCliente(cedula);
                 String[] parts = datos.split(",");
                 String part1 = parts[0]; // cedula
@@ -362,53 +378,60 @@ public class Clientes extends javax.swing.JInternalFrame {
                 jtxtborn.setText(part3);
                 jtxtCorreo.setText(part4);
                 jtxtCategorias.setText(part5);
-
                 editar = true;
             } else {
-                JOptionPane.showMessageDialog(null, "Error, los datos no fueron encontrados", "Error Datos", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error, los datos no fueron "
+        + "encontrados", "Error Datos", JOptionPane.ERROR_MESSAGE);
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Error, debe consultar a través de la cedula", "Error encontrado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error, debe consultar a través"
+        + " de la cedula", "Error encontrado", JOptionPane.ERROR_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Error, la lista está vacía", "Error encontrado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error, la lista está vacía",
+                 "Error encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void borrarDatos() {
         try {
             String borrarDato = cedulaCliente;
-            //if (!nulos()) {  //Aqui ponemos si tiene alquier o no
-                if (cls.search(borrarDato)) {
-                    JOptionPane.showMessageDialog(null, "Cliente borrado correctamente", "Cliente borrado", JOptionPane.INFORMATION_MESSAGE);
-                    limpiar();
-                    //borrarDato();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Tiene un alquier asociado", "Error encontrado", JOptionPane.ERROR_MESSAGE);
-                }
-                int filaSelec = Tabla.getSelectedRow();
-                if (filaSelec >= 0) {
-                    modelo.removeRow(filaSelec);
-                } else {
-                 
-                }
+           //Llama al metodo y si le pasan los datos por parametros
+            if (cls.search(borrarDato)) {
+                JOptionPane.showMessageDialog(null, "Cliente borrado correctamente",
+             "Cliente borrado", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Tiene un alquier asociado", 
+               "Error encontrado", JOptionPane.ERROR_MESSAGE);
+            }
+           //Seleccione la tabla y borre
+            int filaSelec = Tabla.getSelectedRow();
+            if (filaSelec >= 0) {
+                modelo.removeRow(filaSelec);
+            } else {
+
+            }
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Debe hacer una consulta y luego si lo desea puede borrar el Cliente", "Error encontrado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe hacer una consulta y"
+ + " luego si lo desea puede borrar el Cliente", "Error encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void editarDatos() {
-        
-        if (!nulos()) {
 
+        if (!nulos()) {
+            //Pide datos
             //cedulaCliente = jtxtId.getText();
             nombre = jtxtNombre.getText();
             nacimiento = jtxtborn.getText();
             correo = jtxtCorreo.getText();
             categorias = jtxtCategorias.getText();
             if (editar) {
-                if (cls.editarCliente(cedulaCliente, nombre, nacimiento, correo, categorias) == true) {
+                //Llama al metodo y si le pasan los datos por parametros
+                if (cls.editarCliente(cedulaCliente, nombre, nacimiento, correo,
+                categorias) == true) {
                     int filas = 0;
-
+                 // Se ponen los datos en los respectivos campos
                     String[] datos = new String[5];
                     datos[0] = jtxtIds.getText();
                     datos[1] = jtxtNombre.getText();
@@ -420,10 +443,12 @@ public class Clientes extends javax.swing.JInternalFrame {
                         modelo.setValueAt(datos[i], filas, i);
                     }
 
-                    JOptionPane.showMessageDialog(null, "El Cliente ha sido editado correctamente", "Cliente Editado", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El Cliente ha sido editado"
+ + "       correctamente", "Cliente Editado", JOptionPane.INFORMATION_MESSAGE);
                     limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error, el Cliente no fue editado correctamente", "Error Modificación", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error, el Cliente no"
+ + "  fue editado correctamente", "Error Modificación", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -439,7 +464,7 @@ public class Clientes extends javax.swing.JInternalFrame {
 
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        agregar();   
+        agregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -454,12 +479,12 @@ public class Clientes extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         borrarDatos();
         CargarInterfaz(); //Sirven para la tabla
-        CargarDatos(); 
-              
+        CargarDatos();
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        consultar();      
+        consultar();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -467,27 +492,27 @@ public class Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jtxtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIdKeyTyped
-        
+
     }//GEN-LAST:event_jtxtIdKeyTyped
 
     private void jtxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtNombreKeyTyped
-    
+
     }//GEN-LAST:event_jtxtNombreKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           cls.InfoAlquileres(cedulaCliente);
+        cls.InfoAlquileres(cedulaCliente);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void borrarDatoTabla() {
-       
+
     }
 
     public void borrarTabla() {
-      
+
     }
 
     public void actualiza() {
-       
+
     }
 
 
