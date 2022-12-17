@@ -3,20 +3,20 @@ import javax.crypto.AEADBadTagException;
 import javax.swing.JOptionPane;
 
 public class clsGestionVehiculo {
-
+    //declaracion de nodos 
     private clsNodoVehiculos cabeza;
     private clsNodoVehiculos ultimo;
     private int cantNodos;
-
+    //constructores
     public clsGestionVehiculo() {
         this.cabeza = null;
         this.ultimo = null;
     }
-
+    //para verificar si es vacia 
     public boolean esVacia() {
         return (this.cabeza == null);
     }
-
+    //metodo de push sencillo
     public void registraVehiculo(clsVehiculos v) {
         if (cabeza == null) {
             cabeza = new clsNodoVehiculos(v);
@@ -29,7 +29,7 @@ public class clsGestionVehiculo {
         ultimo.setNext(cabeza);
         this.cantNodos++;
     }
-
+    //metodo push 
     public void registrar(clsVehiculos v) {
 
         clsNodoVehiculos newnode = new clsNodoVehiculos(v);
@@ -42,7 +42,7 @@ public class clsGestionVehiculo {
             cabeza.getNext().setBack(newnode);
         }
     }
-
+    // metodo para realizar poc, toma como referencia la placa
     public boolean eliminaVehiculo(String numeroPlaca) {
         if (cabeza != null) {
             if (cabeza.getDato().getNumeroPlaca() == numeroPlaca) {
@@ -62,20 +62,21 @@ public class clsGestionVehiculo {
         }
         return false;
     }
-
+    //revisa indice y posicion, no se utiliza
     public boolean esPosicionValida(int indice) {
-        return (indice > 0 && indice <= this.cantNodos) || (indice > 0 && indice == this.cantNodos + 1);
+        return (indice > 0 && indice <= this.cantNodos) || (indice > 0 
+                && indice == this.cantNodos + 1);
     }
-
+    //metodo para remover nodos segun posicion 
     public boolean removerEnPosicion(String placa) {
 
         if (cabeza == null) {
-
+            //verifica cabeza sea nula, se sale 
             return false;
         } else {
             System.out.println(cabeza.getDato().getNumeroPlaca());
             System.out.println(placa);
-            clsNodoVehiculos aux = this.cabeza;
+            clsNodoVehiculos aux = this.cabeza; //se declara cabeza para iterar
             if (cabeza.getDato().getNumeroPlaca().equalsIgnoreCase(placa)) {
 
                 this.eliminarprimero();
@@ -102,7 +103,7 @@ public class clsGestionVehiculo {
         }
         return false;
     }
-
+    //metodo utilzado arriba para eliminar, este elimina primero
     public void eliminarprimero() {
         if (cabeza != null) {
             if (cabeza == ultimo) {
@@ -113,7 +114,7 @@ public class clsGestionVehiculo {
             }
         }
     }
-
+    //metodo utilizado arriba para eliminar, este elimina ultimo
     public void eliminarUltimo() {
         if (ultimo != null) {
             if (cabeza == ultimo) {
@@ -124,7 +125,7 @@ public class clsGestionVehiculo {
             }
         }
     }
-
+    //metodo para editar un vehiculo seleccionado, toma parametro de placa
     public void modificarVehiculo(clsVehiculos v) {
         if (cabeza != null) {
             clsNodoVehiculos aux = cabeza;
@@ -145,8 +146,11 @@ public class clsGestionVehiculo {
             }
         }
     }
-
-    public boolean modifcar(String numeroPlaca, String anio, String cilindrada, String capacidadPasajeros, String precioAlq, String marca, String modelo, String color, String tipoDeCombustible, String extras, String estado) {
+    //metodo moficar o editar, recibe como parametro el constructor de vehiculo
+    public boolean modifcar(String numeroPlaca, String anio, String cilindrada,
+            String capacidadPasajeros, String precioAlq, String marca, 
+            String modelo, String color, String tipoDeCombustible, 
+            String extras, String estado) {
 
         clsNodoVehiculos aux = this.cabeza;
         boolean respuesta = false;
@@ -186,7 +190,7 @@ public class clsGestionVehiculo {
         }
         return respuesta;
     }
-
+    //metodo para consultar vehiculos por placa, no se utiliza
     public String consultaVehiculos(String numeroPlaca) {
         String placaVehiculo = " ";
         if (cabeza != null) {
@@ -201,11 +205,12 @@ public class clsGestionVehiculo {
         return placaVehiculo;
 
     }
-
+    //metodo para consultar vehiculos por placa, se utiliza en la interfaz
     public String consultar(String numeroPlaca) {
         clsNodoVehiculos aux = this.cabeza;
         String anio = " ", cilindrada = " ", capacidadPasajeros = " ", precioAlq = " ";
-        String placaVehiculo = " ", marca = " ", modelo = " ", color = " ", tipoDeCombustible = " ", extras = " ", estado = " ";
+        String placaVehiculo = " ", marca = " ", modelo = " ", color = " ", 
+        tipoDeCombustible = " ", extras = " ", estado = " ";
         int contador = 1;
         if (esVacia()) {
             JOptionPane.showMessageDialog(null, "Esta vacia");
@@ -244,7 +249,7 @@ public class clsGestionVehiculo {
                 + modelo + "," + color + "," + tipoDeCombustible + ","
                 + extras + "," + estado;
     }
-
+    //metodo para impresion 
     public void mostrarListaInicioFin() {
 
         if (!esVacia()) {
@@ -252,14 +257,17 @@ public class clsGestionVehiculo {
             clsNodoVehiculos aux = ultimo;
             while (aux != null) {
 
-                datos = datos + "[" + " Placa: " + aux.getDato().getNumeroPlaca() + ", Año: " + aux.getDato().getAnio() + ", Pasajeros: " + aux.getDato().getCapacidadPasajeros() + "  Estado: " + aux.getDato().getEstado() + "]  <=>  ";
+                datos = datos + "[" + " Placa: " + aux.getDato().getNumeroPlaca() 
+                        + ", Año: " + aux.getDato().getAnio() + ", Pasajeros: " 
+                        + aux.getDato().getCapacidadPasajeros() + "  Estado: " 
+                        + aux.getDato().getEstado() + "]  <=>  ";
                 aux = aux.getBack();
             }
             System.out.println(datos + "Mostrando lista");
 
         }
     }
-
+    //metodo toString convencional
     @Override
     public String toString() {
         clsNodoVehiculos aux = cabeza;
