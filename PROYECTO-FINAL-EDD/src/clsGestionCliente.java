@@ -51,7 +51,8 @@ public class clsGestionCliente {
         //Se crea y se seta el aux como cima
         clsNodoCliente aux = this.cima;
         //Variables
-        String cedulaCliente = " ", nombre = " ", nacimiento = " ", correo = " ", categorias = " ";
+        String cedulaCliente = " ", nombre = " ", nacimiento = " ", 
+                correo = " ", categorias = " ";
         int contador = 1;
         //Pregunta si es vacia
         if (esVacia()) {
@@ -110,7 +111,8 @@ public class clsGestionCliente {
         }
     }
 
-    public boolean editarCliente(String cedula, String nombre, String nacimiento, String correo, String categorias) {
+    public boolean editarCliente(String cedula, String nombre, String nacimiento
+            , String correo, String categorias) {
         clsNodoCliente aux = this.cima;
         int contador = 1;
         boolean respuesta = false;
@@ -315,9 +317,11 @@ public class clsGestionCliente {
                 contador++;
             }
         }
-        System.out.println(cedula + "," + nombre + "," + nacimiento + "," + correo + "," + categorias);
+        System.out.println(cedula + "," + nombre + "," + nacimiento + "," 
+                + correo + "," + categorias);
         // Retorna el value de la bandera.
-        return cedula + "," + nombre + "," + nacimiento + "," + correo + "," + categorias;
+        return cedula + "," + nombre + "," + nacimiento + "," + correo + "," 
+                + categorias;
     }
 
     public void desplegarlista() {
@@ -326,8 +330,11 @@ public class clsGestionCliente {
         aux = cima;
         if (aux != null) {
             while (aux != null) {
-                System.out.println("|\t" + aux.getDato().getCedula() + " " + aux.getDato().getNombre() + " "
-                        + aux.getDato().getNacimiento() + " " + aux.getDato().getCorreo() + " " + aux.getDato().getCategoria() + "\t|");
+                System.out.println("|\t" + aux.getDato().getCedula() + " " 
+                        + aux.getDato().getNombre() + " "
+                        + aux.getDato().getNacimiento() + " " 
+                        + aux.getDato().getCorreo() + " " 
+                        + aux.getDato().getCategoria() + "\t|");
                 System.out.println("----------------------------------------");
                 aux = aux.getNext();
             }
