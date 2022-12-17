@@ -7,17 +7,20 @@ import javax.swing.JOptionPane;
  */
 public class clsGestionCliente {
 
+    //Instancia 
     clsAtributosAlquiler alquiler = new clsAtributosAlquiler();
     private clsNodoAlquiler cabeza;
     private clsNodoCliente cima;
     private int largo;
 
+    //Constructor
     public clsGestionCliente() {
 
         this.cima = null;
         this.largo = 0;
     }
 
+    //Pregunta si es vacia
     public boolean esVacia() {
         return cima == null;
     }
@@ -28,25 +31,34 @@ public class clsGestionCliente {
 
     public void registrarCliente(clsCliente c) {
 
+        //Crea un nuevo nodo seteandole el valor de clientes
         clsNodoCliente newNode = new clsNodoCliente(c);
 
+        //Pregunta si es vacia
         if (this.esVacia()) {
+            //Nuevo nodo ahora es la cima
             this.cima = newNode;
         } else {
+            //Lo setea atras 
             newNode.setNext(this.cima);
             this.cima = newNode;
         }
+        //Aumenta el tamaño
         this.largo++;
     }
 
     public String buscarCliente(String cedula) {
+        //Se crea y se seta el aux como cima
         clsNodoCliente aux = this.cima;
+        //Variables
         String cedulaCliente = " ", nombre = " ", nacimiento = " ", correo = " ", categorias = " ";
         int contador = 1;
+        //Pregunta si es vacia
         if (esVacia()) {
 
         } else {
             do {
+                //Si la cedula es la misma a la que se pasa por parametros, empieza a capturar los datos
                 if (aux.getDato().getCedula().equalsIgnoreCase(cedula)) {
                     correo = aux.getDato().getCorreo();
                     cedulaCliente = aux.getDato().getCedula();
@@ -55,24 +67,30 @@ public class clsGestionCliente {
                     categorias = aux.getDato().getCategoria();
                     break;
                 } else {
+                    //Si no muestra el msj
                     JOptionPane.showMessageDialog(null, "El cliente con esos datos no existe");
                 }
+                //Recorre al siguiente
                 aux = aux.getNext();
                 contador++;
+                //mientars sea diferntes de cima
             } while (aux != cima);
         }
         return cedulaCliente + "," + nombre + "," + nacimiento + "," + correo + "," + categorias;
     }
 
     public void InfoAlquileres(String cedula) {
+        //Se crea y se seta el aux como cima
         clsNodoCliente aux = this.cima;
         clsNodoAlquiler aux2 = cabeza;
         int placa = 0, dias = 0;
         int contador = 1;
+        //Pregunta si es vacia
         if (esVacia()) {
             JOptionPane.showMessageDialog(null, "Esta vacia");
         } else {
             do {
+                //Si la cedula es la misma a la que se pasa por parametros, empieza a capturar los datos
                 if (aux.getDato().getCedula().equalsIgnoreCase(cedula)) {
 
                     placa = clsNodoAlquiler.dato.getPlaca();
@@ -80,11 +98,14 @@ public class clsGestionCliente {
                     JOptionPane.showMessageDialog(null, "Placa: " + placa);
                     JOptionPane.showMessageDialog(null, "Dias: " + dias);
                     break;
+                    //Si no muestra el msj
                 } else {
                     JOptionPane.showMessageDialog(null, "El cliente con esos datos no existe");
                 }
+                //Recorre al siguiente
                 aux = aux.getNext();
                 contador++;
+            //mientars sea diferntes de cima
             } while (aux != cima);
         }
     }
@@ -93,10 +114,12 @@ public class clsGestionCliente {
         clsNodoCliente aux = this.cima;
         int contador = 1;
         boolean respuesta = false;
+        //Pregunta si es vacia
         if (esVacia()) {
             JOptionPane.showMessageDialog(null, "El Cliente con esos datos no existe");
         } else {
             do {
+                 //Si la cedula es la misma a la que se pasa por parametros, empieza a capturar los datos
                 if (aux.getDato().getCedula().equalsIgnoreCase(cedula)) {
                     if (!aux.getDato().getNombre().equalsIgnoreCase(nombre)) {
                         aux.getDato().setNombre(nombre);
@@ -109,8 +132,10 @@ public class clsGestionCliente {
                     }
                     respuesta = true;
                 }
+              //Recorre al siguiente
                 aux = aux.getNext();
                 contador++;
+            //mientars sea diferntes de cima
             } while (aux != null);
         }
         return respuesta;
@@ -131,7 +156,6 @@ public class clsGestionCliente {
         // Bandera para verificar si exist el elemento a search.
         boolean exist = false;
 
-        //if (!clsNodoAlquiler.dato.getId().equalsIgnoreCase(cedula)) {
         // Recorre la pila hasta llegar encontrar el node o llegar al final
         // de la pila.
         while (exist != true && aux != null) {
@@ -141,18 +165,12 @@ public class clsGestionCliente {
                 exist = true;
                 if (exist = true) {
                     clsNodoCliente cimapPilaAux = null;
-                    // Recoore la pila hasta llegar al node que tenga el value
-                    // igual que el de reference.
-                    //  clsNodoCliente aux = cima;
+                    // Recoore la pila si la cedula es diferente;
                     while (cedula != cima.getDato().getCedula()) {
                         // Crea un node temporal para agregarlos a la pila auxiliar.
                         clsNodoCliente temp = new clsNodoCliente();
                         // Ingresa el value al node temporal.
-
-                        //---temp.setValor(cima.getValor());
-                        //--- temp.setDato(cima.getDato().getCedula());
                         temp.setDato(cima.getDato());
-
                         // Consulta si la pila auxiliar no a sido inicializada.
                         if (cimapPilaAux == null) {
                             // Inicializa la pila auxiliar.
@@ -178,8 +196,6 @@ public class clsGestionCliente {
                         // la pila original.
 
                         registrarCliente(cimapPilaAux.getDato());
-                        //--- push(cimapPilaAux.setDato());
-
                         // Avanza al siguiente node de la pila auxiliar.
                         cimapPilaAux = cimapPilaAux.getNext();
                     }
@@ -204,18 +220,12 @@ public class clsGestionCliente {
             // Crea una pila auxiliar para guardar los valuees que se 
             // vayan desapilando de la pila original.
             clsNodoCliente cimapPilaAux = null;
-            // Recoore la pila hasta llegar al node que tenga el value
-            // igual que el de reference.
-            //  clsNodoCliente aux = cima;
+            // Recoore la pila si la cedula es diferentema;
             while (cedula != cima.getDato().getCedula()) {
                 // Crea un node temporal para agregarlos a la pila auxiliar.
                 clsNodoCliente temp = new clsNodoCliente();
                 // Ingresa el value al node temporal.
-
-                //---temp.setValor(cima.getValor());
-                //--- temp.setDato(cima.getDato().getCedula());
                 temp.setDato(cima.getDato());
-
                 // Consulta si la pila auxiliar no a sido inicializada.
                 if (cimapPilaAux == null) {
                     // Inicializa la pila auxiliar.
@@ -299,7 +309,7 @@ public class clsGestionCliente {
                 exist = true;
                 break;
             } else {
-                // Avanza al siguiente node.
+                // Avanza al siguiente node y muestra el msj.
                 JOptionPane.showMessageDialog(null, "El cliente con esos datos no existe");
                 aux = aux.getNext();
                 contador++;
