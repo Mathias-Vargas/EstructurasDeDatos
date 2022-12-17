@@ -57,9 +57,6 @@ public class Clientes extends javax.swing.JInternalFrame {
             modelo.insertRow(contador, new Object[]{});
             modelo.setValueAt(cliente.getDato().getCedula(), contador, 0);
             modelo.setValueAt(cliente.getDato().getNombre(), contador, 1);
-            // modelo.setValueAt(cliente.getDato().getNacimiento(), contador, 2);
-            // modelo.setValueAt(cliente.getDato().getCorreo(), contador, 3);
-            //modelo.setValueAt(cliente.getDato().getCategoria(), contador, 4);
         }
 
     }
@@ -330,9 +327,6 @@ public class Clientes extends javax.swing.JInternalFrame {
             String[] info = new String[5];
             info[0] = jtxtIds.getText();
             info[1] = jtxtNombre.getText();
-            // info[2] = jtxtborn.getText();
-            // info[3] = jtxtCorreo.getText();
-            // info[4] = jtxtCategorias.getText();
 
             jtxtIds.setText("");
             jtxtNombre.setText("");
@@ -395,11 +389,8 @@ public class Clientes extends javax.swing.JInternalFrame {
                 if (filaSelec >= 0) {
                     modelo.removeRow(filaSelec);
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+                 
                 }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Tiene un alquier asociado", "Error encontrado", JOptionPane.ERROR_MESSAGE);
-//            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Debe hacer una consulta y luego si lo desea puede borrar el Cliente", "Error encontrado", JOptionPane.ERROR_MESSAGE);
         }
@@ -448,44 +439,7 @@ public class Clientes extends javax.swing.JInternalFrame {
 
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        agregar();
-
-        /*clsGestionCliente gc = new clsGestionCliente();
-
-        int cedula = Integer.parseInt(jtxtId.getText());
-        String nombre = jtxtNombre.getText();
-        String nacimiento = jtxtborn.getText();
-        String correo = jtxtCorreo.getText();
-        String categorias = jtxtCategorias.getText();
-
-        gc.registrarCliente(new clsCliente(cedulaCliente, nombre, nacimiento, correo,
-                categorias));
-
-        //String conver = "";
-        //gc.desplegarlista();
-        String[] info = new String[5];
-        info[0] = jtxtId.getText();
-        info[1] = jtxtNombre.getText();
-        info[2] = jtxtborn.getText();
-        info[3] = jtxtCorreo.getText();
-        info[4] = jtxtCategorias.getText();
-
-        jtxtId.setText("");
-        jtxtNombre.setText("");
-        jtxtborn.setText("");
-        jtxtCorreo.setText("");
-        jtxtCategorias.setText("");
-
-        modelo.addRow(info);
-        // clsCliente c = new clsCliente(cedula, nombre, nacimiento, correo, categorias);
-        //contenedor.add(c);
-        /*try {
-            JOptionPane.showMessageDialog(null, "¡Datos agregados correctamente!",
-                    "Datos agregados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex01) {
-            JOptionPane.showMessageDialog(null, "¡Error al guardar, revise!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }*/
+        agregar();   
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -501,116 +455,23 @@ public class Clientes extends javax.swing.JInternalFrame {
         borrarDatos();
         CargarInterfaz(); //Sirven para la tabla
         CargarDatos(); 
-        
-        // borrarDatoTabla();
-
-        /*   if (cls.tamanio() > 0) {
-            cls.pop();
-        }
-
-        clsGestionCliente gc = new clsGestionCliente();
-        int cedula = Integer.parseInt(jtxtId.getText());
-        gc.pop();*/
-        //  gc.eliminarCliente(7);
-        //   gc.desplegarlista();
-
-        /*int fila_seleccionada=Tabla.getSelectedRow();
-          if(fila_seleccionada>=0){
-            modelo.removeRow(fila_seleccionada);
-        }else{
-            JOptionPane.showMessageDialog(null,"Seleccione una fila por favor");
-        } */
-        //  jtxtId.setText("");
-
+              
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-
-        consultar();
-        /*clsGestionCliente gc = new clsGestionCliente();
-        //  clsCliente c = new clsCliente();
-        int cedula = Integer.parseInt(jtxtId.getText());
-        gc.ConsultarCliente(cedula);*/
-
- /*try {
-            JOptionPane.showMessageDialog(null, "¡Datos consultados correctamente!",
-                    "Datos consultados", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex01) {
-            JOptionPane.showMessageDialog(null, "¡Error al consultar, revise!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }*/
-
+        consultar();      
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarDatos();
-        /* clsGestionCliente gc = new clsGestionCliente();
-        int cedula = Integer.parseInt(jtxtId.getText());
-        String nombre = jtxtNombre.getText();
-        String nacimiento = jtxtborn.getText();
-        String correo = jtxtCorreo.getText();
-        String categorias = jtxtCategorias.getText();
-
-        gc.modificarCliente(new clsCliente(cedula, nombre, nacimiento, correo,
-                categorias));
-
-        try {
-            JOptionPane.showMessageDialog(null, "¡Datos modificados correctamente!",
-                    "Datos modificados ", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex01) {
-            JOptionPane.showMessageDialog(null, "¡Error al modificar, revise!", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }*/
-
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jtxtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIdKeyTyped
-        // Aca nos permite buscar los datos del empleado, cuando apenas
-        // coloquemos la cedula y presionemos enter esta nos mostrara los datos
-        // del empleado ya registrado.
-
-        /*int press = evt.getKeyChar();
-        if (press == 10) {
-            String cedulaencontrado = jtxtNombre.getText().trim();
-            // int cedulaencontrado=Integer.parseInt(jtxtId.getText().trim();
-            clsCliente c;
-            for (int i = 0; i < contenedor.size(); i++) {
-                c = (clsCliente) contenedor.get(i);
-                if (cedulaencontrado.equalsIgnoreCase(c.getNombre())) {
-                    jtxtId.setText(Integer.toString(c.getCedula()));
-                    jtxtNombre.setText(c.getNombre());
-                    jtxtborn.setText(c.getNacimiento());
-                    jtxtCorreo.setText(c.getCorreo());
-                    jtxtCategorias.setText(c.getCategoria());
-
-                    buscar = i;
-                    break;
-                }
-            }
-        }*/
+        
     }//GEN-LAST:event_jtxtIdKeyTyped
 
     private void jtxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtNombreKeyTyped
-        /*// TODO add your handling code here:
-        int press = evt.getKeyChar();
-        if (press == 10) {
-            String cedulaencontrado = jtxtNombre.getText().trim();
-            // int cedulaencontrado=Integer.parseInt(jtxtId.getText().trim();
-            clsCliente c;
-            for (int i = 0; i < contenedor.size(); i++) {
-                c = (clsCliente) contenedor.get(i);
-                if (cedulaencontrado.equalsIgnoreCase(c.getNombre())) {
-                    // jtxtId.setText(Integer.toString(c.getCedula()));
-                    //jtxtNombre.setText(c.getNombre());
-                    jtxtborn.setText(c.getNacimiento());
-                    jtxtCorreo.setText(c.getCorreo());
-                    jtxtCategorias.setText(c.getCategoria());
-
-                    buscar = i;
-                    break;
-                }
-            }
-        }*/
+    
     }//GEN-LAST:event_jtxtNombreKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -618,45 +479,15 @@ public class Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void borrarDatoTabla() {
-
-        /*   int filaSelec = Tabla.getSelectedRow();
-
-        if (filaSelec >= 0) {
-            modelo.removeRow(filaSelec);
-        } else {
-            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
-        }*/
+       
     }
 
     public void borrarTabla() {
-
-        /*     DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }*/
+      
     }
 
     public void actualiza() {
-        /*  borrarTabla();
-        if (cls.tamanio() > 0) {
-
-            for (int i = 0; i < cls.tamanio(); i++) {
-                String[] info = new String[5];
-                info[0] = jtxtId.getText();
-                info[1] = jtxtNombre.getText();
-                info[2] = jtxtborn.getText();
-                info[3] = jtxtCorreo.getText();
-                info[4] = jtxtCategorias.getText();
-
-                jtxtId.setText("");
-                jtxtNombre.setText("");
-                jtxtborn.setText("");
-                jtxtCorreo.setText("");
-                jtxtCategorias.setText("");
-
-            }
-
-        }*/
+       
     }
 
 
